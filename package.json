@@ -1,14 +1,17 @@
 {
   "name": "crudapi",
   "version": "1.0.0",
-  "description": "I bulit a CRUD API using Node, Express, and Mongodb",
+  "description": "I bulit a CRUD API using Node, Express, Mongodb, and Mongoose",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node app.js"
   },
   "author": "Hardip Chander",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "mongoose": "^8.5.3",
+    "nodemon": "^3.1.4"
   }
 }
