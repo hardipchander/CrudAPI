@@ -1,0 +1,14 @@
+{
+  "name": "crudapi",
+  "version": "1.0.0",
+  "description": "I bulit a CRUD API using Node, Express, and Mongodb",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hardip Chander",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
