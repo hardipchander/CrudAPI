@@ -2,6 +2,8 @@ const mongoose=require("mongoose");
 const express=require("express");
 const app=express();
 
+const Dog=require("./models/dog.js");
+
 const main= async () => {
   await mongoose.connect("mongodb://localhost:27017/demo");
 };
@@ -17,7 +19,21 @@ main().then(() => {
   console.log("Could not connect to database",err);
 })
 
+// Set up middleware and routes
+app.use(express.json());
+
 // Homepage
 app.get("/", (req, res)=> {
   res.send("<h1>Home Page to API</h1>");
+});
+
+// Save dog 
+app.post("/api/dogs", async (req, res)=> {
+  try {
+    const dog=await Dog.create(req.body);
+    res.status(200).json(dog);
+  } 
+  catch(err) {
+    res.status(500).json({message: err.message});
+  }
 });
