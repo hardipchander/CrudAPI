@@ -27,7 +27,23 @@ app.get("/", (req, res)=> {
   res.send("<h1>Home Page to API</h1>");
 });
 
-// Save dog 
+// Index for Dogs
+app.get("/api/dogs", async (req, res)=> {
+  try {
+    const allDogs=await Dog.find({});
+    res.status(200).json(allDogs);
+  } 
+  catch(err) {
+    res.status(500).json({err: err.message});
+  }
+});
+
+// Show for Dogs
+app.get("/api/dogs", async (req, res) => {
+
+})
+
+// Create for Dogs 
 app.post("/api/dogs", async (req, res)=> {
   try {
     const dog=await Dog.create(req.body);
