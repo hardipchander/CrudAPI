@@ -39,8 +39,15 @@ app.get("/api/dogs", async (req, res)=> {
 });
 
 // Show for Dogs
-app.get("/api/dogs", async (req, res) => {
-
+app.get("/api/dogs/:id", async (req, res) => {
+  try {
+    const {id}=req.params;
+    const dog=await Dog.findById(id);
+    res.status(200).json(dog);
+  }
+  catch (err) {
+    res.status(500).json({err: err.message});
+  }
 })
 
 // Create for Dogs 
@@ -51,5 +58,44 @@ app.post("/api/dogs", async (req, res)=> {
   } 
   catch(err) {
     res.status(500).json({message: err.message});
+  }
+});
+
+// Update for dogs
+app.put("/api/dogs/:id", async (req, res) => {
+  try {
+    const {id}=req.params;
+    const dog=await Dog.findByIdAndUpdate(id, req.body);
+
+    // If dog does not exist
+    if(!dog) {
+      return res.status(404).json({message: "Cannot find dog"});
+    } 
+    
+    // Display the updated dog
+    const updatedDog=await Dog.findById(id);
+    res.status(200).json(updatedDog);
+
+  } catch(err) {
+    res.status(500).json({err: err.message});
+  }
+});
+
+// Delete for dogs
+app.delete("/api/dogs/:id", async (req, res) => {
+  try {
+    const {id}=req.params;
+    const delDog=await Dog.findByIdAndDelete(id);
+
+    // if dog does not exist
+    if(!delDog) {
+      return res.status(404).json({message: "Cannot find dog"});
+    } 
+    else {
+      return res.status(300).redirect("/api/dogs");
+    }
+
+  } catch(err) {
+    res.status(500).json({err: err.message});
   }
 });
